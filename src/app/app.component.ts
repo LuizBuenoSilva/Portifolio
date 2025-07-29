@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ProjetosComponent } from './components/projetos/projetos.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [CommonModule, ProjetosComponent],
+  template: `
+    <h1>Meus Projetos</h1>
+    <app-projetos></app-projetos>
+  `
 })
-export class AppComponent {
-  title = 'portfolio-frontend';
-}
+export class AppComponent {}
