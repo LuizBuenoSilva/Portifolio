@@ -29,8 +29,8 @@ interface PortfolioProject {
 export class AppComponent implements AfterViewInit, OnDestroy {
   readonly title = 'Luiz Henrique Dev World';
   readonly role = 'Software Engineer';
-  readonly worldWidth = 2200;
-  readonly worldHeight = 1400;
+  readonly worldWidth = 1800;
+  readonly worldHeight = 1100;
   readonly stack = ['PHP', 'Laravel', 'Vue', 'Java', 'Angular'];
 
   readonly projects: PortfolioProject[] = [
@@ -39,8 +39,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       liveUrl: 'https://mananews.com.br/',
       description: 'Portal de entretenimento e cultura geek com conteúdo sobre games, séries, filmes e livros, pensado como um produto editorial completo.',
       technologies: ['Web', 'CMS', 'SEO', 'Frontend', 'Backend'],
-      x: 300,
-      y: 270,
+      x: 250,
+      y: 210,
       icon: '◈',
       district: 'Media District',
       tagline: 'Entertainment Platform',
@@ -52,8 +52,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       liveUrl: 'https://yuzostyle.com/',
       description: 'Produto de moda com inteligência artificial para montar looks, criar conceitos visuais e visualizar combinações em avatar 3D.',
       technologies: ['AI', 'Fashion Tech', '3D', 'Web', 'Product'],
-      x: 1660,
-      y: 270,
+      x: 1360,
+      y: 210,
       icon: '✦',
       district: 'AI District',
       tagline: 'AI Fashion Platform',
@@ -65,8 +65,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       repository: 'minecraft',
       description: 'Servidor Minecraft configurado e versionado como projeto técnico, reunindo Java, infraestrutura, Docker e administração de servidor.',
       technologies: ['Java', 'Docker', 'Server', 'Infrastructure'],
-      x: 980,
-      y: 1000,
+      x: 805,
+      y: 760,
       icon: '◆',
       district: 'Java District',
       tagline: 'Game Server',
@@ -75,7 +75,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     }
   ];
 
-  player = { x: 1100, y: 770 };
+  player = { x: 900, y: 555 };
   facing: Facing = 'down';
   isMoving = false;
   selectedProject: PortfolioProject | null = null;
