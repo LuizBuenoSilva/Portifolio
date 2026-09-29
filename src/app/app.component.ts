@@ -1,6 +1,19 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AfterViewInit, Component, HostListener, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
 
+type Facing = 'up' | 'down' | 'left' | 'right';
+type BuildingType =
+  | 'boutique'
+  | 'arcade'
+  | 'events'
+  | 'stadium'
+  | 'lab'
+  | 'bank'
+  | 'office'
+  | 'voxel'
+  | 'cafe'
+  | 'arena';
+
 interface PortfolioProject {
   name: string;
   repository: string;
@@ -10,6 +23,9 @@ interface PortfolioProject {
   y: number;
   icon: string;
   district: string;
+  tagline: string;
+  buildingType: BuildingType;
+  accent: string;
 }
 
 @Component({
@@ -21,114 +37,149 @@ interface PortfolioProject {
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
   readonly title = 'Luiz Henrique Dev World';
-  readonly worldWidth = 2200;
-  readonly worldHeight = 1400;
+  readonly role = 'Software Engineer';
+  readonly worldWidth = 2600;
+  readonly worldHeight = 1680;
+  readonly stack = ['PHP', 'Laravel', 'Vue', 'Java', 'Angular'];
 
   readonly projects: PortfolioProject[] = [
     {
       name: 'Organizei',
       repository: 'Organizei',
-      description: 'Aplicativo para organização de guarda-roupa com React Native, Expo, Fastify e PostgreSQL.',
+      description: 'Aplicativo para organização de guarda-roupa com foco em praticidade, experiência visual e organização pessoal.',
       technologies: ['React Native', 'Expo', 'Fastify', 'Prisma', 'PostgreSQL'],
-      x: 280,
-      y: 250,
+      x: 170,
+      y: 160,
       icon: '👕',
-      district: 'App District'
+      district: 'App District',
+      tagline: 'Closet App',
+      buildingType: 'boutique',
+      accent: '#6ce0a2'
     },
     {
       name: 'Commander Points',
       repository: 'commander-points',
-      description: 'Projeto web voltado a pontuação e acompanhamento de partidas.',
-      technologies: ['Web', 'TypeScript'],
+      description: 'Projeto para pontuação e acompanhamento de partidas com uma pegada estratégica e voltada a jogos.',
+      technologies: ['TypeScript', 'Web', 'Game Logic'],
       x: 760,
-      y: 220,
+      y: 130,
       icon: '🎴',
-      district: 'Game District'
+      district: 'Game District',
+      tagline: 'Score Tracker',
+      buildingType: 'arcade',
+      accent: '#ff6fa5'
     },
     {
       name: 'EventTec',
       repository: 'EventTec',
-      description: 'Plataforma de eventos criada para explorar arquitetura web e experiência de usuário.',
-      technologies: ['Web', 'Frontend', 'Backend'],
-      x: 1260,
-      y: 260,
+      description: 'Plataforma para eventos, ingressos e experiências digitais com foco em organização e usabilidade.',
+      technologies: ['Frontend', 'Backend', 'Web'],
+      x: 1410,
+      y: 165,
       icon: '🎟️',
-      district: 'Event District'
+      district: 'Event District',
+      tagline: 'Event Platform',
+      buildingType: 'events',
+      accent: '#ff7b64'
     },
     {
       name: 'FootBall SaaS',
       repository: 'FootBallSaas',
-      description: 'Projeto SaaS focado no universo do futebol e gerenciamento de informações.',
-      technologies: ['SaaS', 'Web', 'Backend'],
-      x: 1690,
-      y: 240,
+      description: 'Solução SaaS voltada ao universo do futebol com gestão de informações e uma identidade esportiva.',
+      technologies: ['SaaS', 'Backend', 'Web'],
+      x: 2035,
+      y: 170,
       icon: '⚽',
-      district: 'Sports District'
+      district: 'Sports District',
+      tagline: 'Sports SaaS',
+      buildingType: 'stadium',
+      accent: '#78d9ff'
     },
     {
       name: 'IA Animal',
       repository: 'IANIMAL',
-      description: 'Experimento de produto usando inteligência artificial aplicado ao universo animal.',
-      technologies: ['AI', 'Web'],
-      x: 260,
-      y: 840,
+      description: 'Experimento com inteligência artificial aplicada ao universo animal, unindo tecnologia e produto.',
+      technologies: ['AI', 'Web', 'UX'],
+      x: 180,
+      y: 980,
       icon: '🤖',
-      district: 'AI District'
+      district: 'AI District',
+      tagline: 'AI Product',
+      buildingType: 'lab',
+      accent: '#8ff4e2'
     },
     {
       name: 'DIO Bank',
       repository: 'DIO-BANK',
-      description: 'Projeto bancário para praticar regras de negócio, orientação a objetos e backend.',
-      technologies: ['Backend', 'OOP'],
-      x: 720,
-      y: 850,
+      description: 'Projeto bancário para praticar regras de negócio, modelagem e implementação de soluções backend.',
+      technologies: ['Backend', 'Business Rules', 'OOP'],
+      x: 705,
+      y: 1010,
       icon: '🏦',
-      district: 'Backend District'
+      district: 'Finance District',
+      tagline: 'Banking App',
+      buildingType: 'bank',
+      accent: '#f0d28a'
     },
     {
       name: 'Login Page',
       repository: 'LoginPage',
-      description: 'Aplicação full stack com Angular no frontend e Java Spring Boot no backend.',
+      description: 'Aplicação full stack com Angular e Java Spring Boot, conectando autenticação e experiência moderna.',
       technologies: ['Angular', 'Java', 'Spring Boot'],
-      x: 1190,
-      y: 820,
+      x: 1250,
+      y: 975,
       icon: '🔐',
-      district: 'Java District'
+      district: 'Java District',
+      tagline: 'Auth System',
+      buildingType: 'office',
+      accent: '#78c7ff'
     },
     {
       name: 'Minecraft Server',
       repository: 'minecraft',
-      description: 'Projeto de servidor Minecraft com infraestrutura e configuração versionadas.',
+      description: 'Projeto de infraestrutura e configuração para servidor Minecraft, com foco em organização técnica.',
       technologies: ['Java', 'Docker', 'Server'],
-      x: 1680,
-      y: 830,
+      x: 2000,
+      y: 1010,
       icon: '⛏️',
-      district: 'Java District'
+      district: 'Infra District',
+      tagline: 'Game Server',
+      buildingType: 'voxel',
+      accent: '#74e39a'
     },
     {
       name: 'Cardápio',
       repository: 'Cardapio',
-      description: 'Aplicação de cardápio digital criada para praticar desenvolvimento web.',
-      technologies: ['Web', 'Frontend'],
+      description: 'Aplicação de cardápio digital feita para praticar produto, apresentação visual e experiência do usuário.',
+      technologies: ['Frontend', 'Web'],
       x: 520,
-      y: 1140,
+      y: 1380,
       icon: '🍔',
-      district: 'Web District'
+      district: 'Food District',
+      tagline: 'Digital Menu',
+      buildingType: 'cafe',
+      accent: '#ffb27a'
     },
     {
       name: 'HLTV Bot',
       repository: 'hltvBot',
-      description: 'Bot relacionado ao ecossistema competitivo de Counter-Strike.',
-      technologies: ['Bot', 'Automation'],
-      x: 1480,
-      y: 1120,
+      description: 'Bot voltado ao cenário competitivo, automação e consumo de informações do universo de e-sports.',
+      technologies: ['Automation', 'Bot', 'Data'],
+      x: 1640,
+      y: 1365,
       icon: '🎯',
-      district: 'Automation District'
+      district: 'Automation District',
+      tagline: 'Esports Bot',
+      buildingType: 'arena',
+      accent: '#b294ff'
     }
   ];
 
-  player = { x: 1080, y: 665 };
+  player = { x: 1290, y: 760 };
+  facing: Facing = 'down';
+  isMoving = false;
   selectedProject: PortfolioProject | null = null;
+
   private pressed = new Set<string>();
   private animationFrame = 0;
   private lastFrame = 0;
@@ -151,16 +202,14 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent): void {
     const key = event.key.toLowerCase();
+
     if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(key)) {
       event.preventDefault();
       this.pressed.add(key);
     }
-    if (key === 'e' && !this.selectedProject) {
-      this.interact();
-    }
-    if (key === 'escape' && this.selectedProject) {
-      this.closeProject();
-    }
+
+    if (key === 'e' && !this.selectedProject) this.interact();
+    if (key === 'escape' && this.selectedProject) this.closeProject();
   }
 
   @HostListener('window:keyup', ['$event'])
@@ -170,26 +219,30 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   get nearbyProject(): PortfolioProject | null {
     let nearest: PortfolioProject | null = null;
-    let nearestDistance = 175;
+    let nearestDistance = 165;
 
     for (const project of this.projects) {
-      const dx = this.player.x - (project.x + 110);
-      const dy = this.player.y - (project.y + 145);
+      const dx = this.player.x - (project.x + 95);
+      const dy = this.player.y - (project.y + 125);
       const distance = Math.hypot(dx, dy);
+
       if (distance < nearestDistance) {
         nearest = project;
         nearestDistance = distance;
       }
     }
+
     return nearest;
   }
 
   get worldTransform(): string {
     if (!this.browser) return 'translate3d(0, 0, 0)';
+
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     const cameraX = Math.min(0, Math.max(viewportWidth - this.worldWidth, viewportWidth / 2 - this.player.x));
     const cameraY = Math.min(0, Math.max(viewportHeight - this.worldHeight, viewportHeight / 2 - this.player.y));
+
     return `translate3d(${cameraX}px, ${cameraY}px, 0)`;
   }
 
@@ -223,7 +276,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.lastFrame = time;
 
     if (!this.selectedProject) {
-      const speed = 280;
+      const speed = 250;
       let dx = 0;
       let dy = 0;
 
@@ -232,11 +285,24 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       if (this.pressed.has('a') || this.pressed.has('arrowleft')) dx -= 1;
       if (this.pressed.has('d') || this.pressed.has('arrowright')) dx += 1;
 
+      this.isMoving = dx !== 0 || dy !== 0;
+
       if (dx !== 0 || dy !== 0) {
+        if (Math.abs(dx) > Math.abs(dy)) {
+          this.facing = dx > 0 ? 'right' : 'left';
+        } else {
+          this.facing = dy > 0 ? 'down' : 'up';
+        }
+
         const length = Math.hypot(dx, dy);
-        this.player.x = Math.max(34, Math.min(this.worldWidth - 34, this.player.x + (dx / length) * speed * delta));
-        this.player.y = Math.max(54, Math.min(this.worldHeight - 30, this.player.y + (dy / length) * speed * delta));
+        const nextX = this.player.x + (dx / length) * speed * delta;
+        const nextY = this.player.y + (dy / length) * speed * delta;
+
+        this.player.x = Math.max(50, Math.min(this.worldWidth - 50, nextX));
+        this.player.y = Math.max(60, Math.min(this.worldHeight - 40, nextY));
       }
+    } else {
+      this.isMoving = false;
     }
 
     this.animationFrame = requestAnimationFrame((nextTime) => this.gameLoop(nextTime));
