@@ -36,9 +36,9 @@
       <div class="crosswalk crosswalk-top"></div>
       <div class="crosswalk crosswalk-bottom"></div>
 
-      <div class="district-label label-app">APP DISTRICT</div>
-      <div class="district-label label-sports">SPORTS DISTRICT</div>
-      <div class="district-label label-tech">TECH DISTRICT</div>
+      <div class="district-label label-app">MEDIA DISTRICT</div>
+      <div class="district-label label-sports">AI DISTRICT</div>
+      <div class="district-label label-tech">JAVA / INFRA</div>
 
       <div *ngFor="let tree of [1,2,3,4,5,6,7,8]" class="tree" [ngClass]="'tree-' + tree"></div>
 
@@ -177,7 +177,8 @@
       </div>
 
       <div class="modal-actions">
-        <a [href]="githubUrl(project)" target="_blank" rel="noreferrer">Ver repositório no GitHub ↗</a>
+        <a *ngIf="project.liveUrl" [href]="project.liveUrl" target="_blank" rel="noreferrer">Visitar projeto ↗</a>
+        <a *ngIf="githubUrl(project) as repoUrl" [href]="repoUrl" target="_blank" rel="noreferrer">Ver repositório no GitHub ↗</a>
         <button type="button" (click)="closeProject()">Continuar explorando</button>
       </div>
     </article>
