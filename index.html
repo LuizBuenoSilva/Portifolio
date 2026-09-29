@@ -17,17 +17,28 @@
       <button class="hotspot hotspot-yuzo" data-project="yuzo" aria-label="Abrir Yuzo Style"></button>
       <button class="hotspot hotspot-minecraft" data-project="minecraft" aria-label="Abrir Minecraft Server"></button>
 
-      <div class="player idle" id="player" aria-label="Personagem">
-        <div class="shadow"></div>
-        <div class="arm arm-left"><span class="hand"></span></div>
-        <div class="arm arm-right"><span class="hand"></span></div>
-        <div class="leg leg-left"></div>
-        <div class="leg leg-right"></div>
-        <div class="body">
-          <span class="jacket-detail"></span>
-        </div>
-        <div class="head"></div>
-        <div class="hair"></div>
+      <div class="static-player-cover" aria-hidden="true"></div>
+
+      <div class="ambient-fx" aria-hidden="true">
+        <div class="water-fx water-fx-left"></div>
+        <div class="water-fx water-fx-bottom-left"></div>
+        <div class="water-fx water-fx-right"></div>
+        <div class="water-fx water-fx-bottom-right"></div>
+        <div class="neon-fx neon-mana"></div>
+        <div class="neon-fx neon-yuzo"></div>
+        <div class="neon-fx neon-minecraft"></div>
+        <div class="lamp-fx lamp-1"></div>
+        <div class="lamp-fx lamp-2"></div>
+        <div class="lamp-fx lamp-3"></div>
+        <div class="lamp-fx lamp-4"></div>
+        <div class="lamp-fx lamp-5"></div>
+        <div class="lamp-fx lamp-6"></div>
+        <div class="petals" id="petals"></div>
+      </div>
+
+      <div class="player idle facing-down" id="player" aria-label="Personagem">
+        <div class="player-shadow"></div>
+        <div class="player-sprite"></div>
       </div>
     </div>
 
