@@ -1,2 +1,152 @@
-<h1>Meus Projetos</h1>
-<app-projetos></app-projetos>
+<main class="portfolio-shell">
+  <header class="hud">
+    <div>
+      <p class="eyebrow">INTERACTIVE PORTFOLIO</p>
+      <h1>Luiz Henrique <span>Dev World</span></h1>
+    </div>
+
+    <div class="hud-actions">
+      <span class="control-pill">WASD / Setas</span>
+      <span class="control-pill">E para interagir</span>
+      <a class="github-pill" href="https://github.com/LuizBuenoSilva" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </div>
+  </header>
+
+  <section class="viewport" aria-label="Mundo interativo do portfólio">
+    <div
+      class="world"
+      [style.width.px]="worldWidth"
+      [style.height.px]="worldHeight"
+      [style.transform]="worldTransform"
+    >
+      <div class="grass-noise"></div>
+
+      <div class="road road-horizontal road-top"></div>
+      <div class="road road-horizontal road-bottom"></div>
+      <div class="road road-vertical road-left"></div>
+      <div class="road road-vertical road-right"></div>
+
+      <div class="central-plaza">
+        <div class="plaza-ring"></div>
+        <div class="profile-kiosk">
+          <div class="avatar-mark">LH</div>
+          <strong>Luiz Henrique</strong>
+          <span>Full Stack Developer</span>
+          <small>Explore a cidade e conheça meus projetos.</small>
+        </div>
+      </div>
+
+      <div class="district-label label-app">APP DISTRICT</div>
+      <div class="district-label label-java">JAVA DISTRICT</div>
+      <div class="district-label label-game">PROJECT DISTRICT</div>
+
+      <button
+        *ngFor="let project of projects"
+        type="button"
+        class="building"
+        [class.is-near]="nearbyProject === project"
+        [style.left.px]="project.x"
+        [style.top.px]="project.y"
+        (click)="openProject(project)"
+        [attr.aria-label]="'Abrir projeto ' + project.name"
+      >
+        <span class="building-shadow"></span>
+        <span class="roof"></span>
+        <span class="building-body">
+          <span class="building-icon">{{ project.icon }}</span>
+          <span class="windows"><i></i><i></i><i></i></span>
+          <span class="door"></span>
+        </span>
+        <span class="project-sign">
+          <strong>{{ project.name }}</strong>
+          <small>{{ project.district }}</small>
+        </span>
+      </button>
+
+      <div class="tree tree-1">🌳</div>
+      <div class="tree tree-2">🌲</div>
+      <div class="tree tree-3">🌳</div>
+      <div class="tree tree-4">🌲</div>
+      <div class="tree tree-5">🌳</div>
+      <div class="tree tree-6">🌲</div>
+
+      <div
+        class="player"
+        [style.left.px]="player.x"
+        [style.top.px]="player.y"
+        aria-label="Personagem do jogador"
+      >
+        <span class="player-shadow"></span>
+        <span class="player-head"></span>
+        <span class="player-body"></span>
+        <span class="player-legs"></span>
+      </div>
+    </div>
+
+    <div class="interaction-hint" *ngIf="nearbyProject && !selectedProject">
+      <kbd>E</kbd>
+      <span>Entrar em <strong>{{ nearbyProject.name }}</strong></span>
+    </div>
+
+    <div class="minimap">
+      <span class="minimap-title">DEV CITY</span>
+      <div class="mini-grid">
+        <i *ngFor="let project of projects" class="mini-building"></i>
+      </div>
+    </div>
+  </section>
+
+  <div class="mobile-controls" aria-label="Controles de movimento">
+    <button
+      (pointerdown)="startMove('w')"
+      (pointerup)="stopMove('w')"
+      (pointercancel)="stopMove('w')"
+      (pointerleave)="stopMove('w')"
+      aria-label="Mover para cima"
+    >▲</button>
+    <div>
+      <button
+        (pointerdown)="startMove('a')"
+        (pointerup)="stopMove('a')"
+        (pointercancel)="stopMove('a')"
+        (pointerleave)="stopMove('a')"
+        aria-label="Mover para esquerda"
+      >◀</button>
+      <button class="action" (click)="interact()" aria-label="Interagir">E</button>
+      <button
+        (pointerdown)="startMove('d')"
+        (pointerup)="stopMove('d')"
+        (pointercancel)="stopMove('d')"
+        (pointerleave)="stopMove('d')"
+        aria-label="Mover para direita"
+      >▶</button>
+    </div>
+    <button
+      (pointerdown)="startMove('s')"
+      (pointerup)="stopMove('s')"
+      (pointercancel)="stopMove('s')"
+      (pointerleave)="stopMove('s')"
+      aria-label="Mover para baixo"
+    >▼</button>
+  </div>
+
+  <div class="project-modal-backdrop" *ngIf="selectedProject as project" (click)="closeProject()">
+    <article class="project-modal" (click)="$event.stopPropagation()">
+      <button class="close-button" type="button" (click)="closeProject()" aria-label="Fechar">×</button>
+
+      <div class="modal-icon">{{ project.icon }}</div>
+      <p class="eyebrow">{{ project.district }}</p>
+      <h2>{{ project.name }}</h2>
+      <p class="project-description">{{ project.description }}</p>
+
+      <div class="tech-list">
+        <span *ngFor="let technology of project.technologies">{{ technology }}</span>
+      </div>
+
+      <div class="modal-actions">
+        <a [href]="githubUrl(project)" target="_blank" rel="noreferrer">Ver repositório no GitHub ↗</a>
+        <button type="button" (click)="closeProject()">Continuar explorando</button>
+      </div>
+    </article>
+  </div>
+</main>

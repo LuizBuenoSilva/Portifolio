@@ -10,20 +10,19 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it(`should have the 'portfolio-frontend' title`, () => {
+  it('should expose the Dev World title', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('portfolio-frontend');
+    expect(fixture.componentInstance.title).toEqual('Luiz Henrique Dev World');
   });
 
-  it('should render title', () => {
+  it('should render the portfolio world title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, portfolio-frontend');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Luiz Henrique');
+    expect(compiled.querySelector('.world')).toBeTruthy();
   });
 });
