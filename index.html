@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#07140f" />
+  <meta name="description" content="Portfólio interativo de Luiz Henrique, Software Engineer." />
+  <title>Luiz Henrique | Dev World</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="viewport" id="viewport">
+    <div class="scene" id="scene">
+      <img class="city" src="./assets/dev-city.webp" alt="Dev World de Luiz Henrique" draggable="false" />
+
+      <button class="hotspot hotspot-mana" data-project="mana" aria-label="Abrir Mana News"></button>
+      <button class="hotspot hotspot-yuzo" data-project="yuzo" aria-label="Abrir Yuzo Style"></button>
+      <button class="hotspot hotspot-minecraft" data-project="minecraft" aria-label="Abrir Minecraft Server"></button>
+
+      <div class="player" id="player" aria-label="Personagem">
+        <div class="shadow"></div>
+        <div class="legs"><span></span><span></span></div>
+        <div class="body"></div>
+        <div class="head"></div>
+        <div class="hair"></div>
+      </div>
+    </div>
+
+    <div class="hint" id="hint" hidden><kbd>E</kbd><span></span></div>
+  </main>
+
+  <dialog id="projectModal">
+    <button class="close" id="closeModal" aria-label="Fechar">×</button>
+    <div class="eyebrow" id="modalDistrict"></div>
+    <h2 id="modalTitle"></h2>
+    <p id="modalDescription"></p>
+    <div class="tags" id="modalTags"></div>
+    <div class="actions">
+      <a id="modalLink" target="_blank" rel="noreferrer">Abrir projeto ↗</a>
+      <button id="continueBtn">Continuar explorando</button>
+    </div>
+  </dialog>
+
+  <script src="./app.js"></script>
+</body>
+</html>

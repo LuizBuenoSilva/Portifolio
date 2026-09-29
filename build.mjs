@@ -1,6 +1,1 @@
-import { cp, mkdir, rm } from 'node:fs/promises';
-
-await rm('dist', { recursive: true, force: true });
-await mkdir('dist', { recursive: true });
-await cp('src/static', 'dist', { recursive: true });
-console.log('Static Phaser portfolio built to dist/');
+import {cp,mkdir,rm} from 'node:fs/promises';await rm('dist',{recursive:true,force:true});await mkdir('dist',{recursive:true});for(const f of ['index.html','styles.css','app.js','assets'])await cp(f,`dist/${f}`,{recursive:true});console.log('Built dist/');

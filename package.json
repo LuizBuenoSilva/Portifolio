@@ -1,8 +1,1 @@
-{
-  "name": "luiz-dev-world",
-  "version": "2.0.0",
-  "private": true,
-  "scripts": {
-    "build": "node build.mjs"
-  }
-}
+{"name":"luiz-dev-world","version":"3.0.0","private":true,"scripts":{"build":"node build.mjs"}}
