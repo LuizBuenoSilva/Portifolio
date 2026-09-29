@@ -19,7 +19,60 @@ const projects={
 
 let scale=1, px=935, py=530;
 let vx=0, vy=0;
+let facing='down';
 const down=new Set();
+
+const walkableRects=[
+  {x:0,y:345,w:1870,h:235},
+  {x:735,y:0,w:400,h:841},
+  {x:640,y:410,w:600,h:360},
+  {x:260,y:285,w:500,h:210},
+  {x:940,y:245,w:420,h:220},
+  {x:1320,y:365,w:500,h:270}
+];
+
+const blockedRects=[
+  {x:0,y:0,w:390,h:340},
+  {x:310,y:70,w:420,h:265},
+  {x:955,y:40,w:395,h:245},
+  {x:1390,y:150,w:480,h:310},
+  {x:0,y:570,w:590,h:271},
+  {x:1280,y:635,w:590,h:206}
+];
+
+function rectContains(r,x,y,pad=0){
+  return x>=r.x+pad&&x<=r.x+r.w-pad&&y>=r.y+pad&&y<=r.y+r.h-pad;
+}
+
+function isWalkable(x,y){
+  const radius=14;
+  const inWalkable=walkableRects.some(r=>rectContains(r,x,y,radius));
+  const inBlocked=blockedRects.some(r=>rectContains(r,x,y,-radius));
+  return inWalkable&&!inBlocked;
+}
+
+function tryMove(nx,ny){
+  let moved=false;
+  if(isWalkable(nx,py)){px=nx;moved=true}else{vx*=.15}
+  if(isWalkable(px,ny)){py=ny;moved=true}else{vy*=.15}
+  return moved;
+}
+
+function createPetals(){
+  const petals=document.getElementById('petals');
+  if(!petals)return;
+  for(let i=0;i<22;i++){
+    const p=document.createElement('i');
+    p.className='petal';
+    p.style.left=(42+Math.random()*35)+'%';
+    p.style.top=(8+Math.random()*30)+'%';
+    p.style.animationDuration=(4+Math.random()*5)+'s';
+    p.style.animationDelay=(-Math.random()*8)+'s';
+    p.style.transform='scale('+(0.6+Math.random()*1.1)+')';
+    petals.appendChild(p);
+  }
+}
+createPetals();
 
 function fit(){
   scale=Math.min(innerWidth/BASE_W,innerHeight/BASE_H);
@@ -94,15 +147,27 @@ function tick(now){
     vy*=.5;
   }
 
-  px=Math.max(50,Math.min(BASE_W-50,px+vx*dt));
-  py=Math.max(80,Math.min(BASE_H-45,py+vy*dt));
+  const nx=Math.max(50,Math.min(BASE_W-50,px+vx*dt));
+  const ny=Math.max(80,Math.min(BASE_H-45,py+vy*dt));
+  tryMove(nx,ny);
   setPlayer();
 
   const moving=Math.hypot(vx,vy)>.12&&!modal.open;
   player.classList.toggle('walking',moving);
   player.classList.toggle('idle',!moving);
-  player.classList.toggle('facing-left',vx<-.18);
-  player.classList.toggle('facing-right',vx>.18);
+
+  if(moving){
+    if(Math.abs(vx)>Math.abs(vy)){
+      facing=vx<0?'left':'right';
+    }else{
+      facing=vy<0?'up':'down';
+    }
+  }
+
+  player.classList.toggle('facing-left',facing==='left');
+  player.classList.toggle('facing-right',facing==='right');
+  player.classList.toggle('facing-up',facing==='up');
+  player.classList.toggle('facing-down',facing==='down');
   const n=nearest();hint.hidden=!n;if(n)hintText.textContent=`Abrir ${n.name}`;
   requestAnimationFrame(tick);
 }
