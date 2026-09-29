@@ -1,9 +1,8 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "portifolio",
-  "compatibility_date": "2026-09-28",
+  "compatibility_date": "2026-09-29",
   "assets": {
-    "directory": "./dist/portfolio-frontend/browser",
+    "directory": "./dist",
     "not_found_handling": "single-page-application"
   }
 }

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07140f">
+  <meta name="description" content="Portfólio interativo de Luiz Henrique, Software Engineer.">
+  <title>Luiz Henrique | Dev World</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="game"></div>
+
+  <section class="identity">
+    <span class="kicker">INTERACTIVE PORTFOLIO</span>
+    <h1>Luiz Henrique <em>Dev World</em></h1>
+    <strong>Software Engineer</strong>
+    <p>Projetos reais, produto e engenharia em um portfólio explorável.</p>
+    <div class="skills"><span>PHP</span><span>Laravel</span><span>Vue</span><span>Java</span><span>Angular</span></div>
+  </section>
+
+  <nav class="controls">
+    <span><kbd>WASD</kbd> mover</span>
+    <span><kbd>E</kbd> interagir</span>
+    <a href="https://github.com/LuizBuenoSilva" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </nav>
+
+  <div id="hint" class="hint" hidden><kbd>E</kbd><span></span></div>
+
+  <dialog id="project-modal">
+    <button class="close" aria-label="Fechar">×</button>
+    <span id="modal-kicker" class="kicker"></span>
+    <h2 id="modal-title"></h2>
+    <p id="modal-description"></p>
+    <div id="modal-tech" class="tech"></div>
+    <div class="modal-actions">
+      <a id="modal-link" target="_blank" rel="noreferrer">Abrir projeto ↗</a>
+      <button id="continue">Continuar explorando</button>
+    </div>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/phaser@4.2.1/dist/phaser.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

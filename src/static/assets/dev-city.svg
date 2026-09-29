@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1000">
+<defs>
+  <linearGradient id="grass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#183f2c"/><stop offset="1" stop-color="#0e2b20"/></linearGradient>
+  <linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#242c2b"/><stop offset="1" stop-color="#161d1c"/></linearGradient>
+  <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#bff7ff"/><stop offset="1" stop-color="#4fa2b0"/></linearGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1f91b7"/><stop offset="1" stop-color="#0d4f74"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-opacity=".35"/></filter>
+  <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1800" height="1000" fill="url(#grass)"/>
+<path d="M0 705h1800v295H0z" fill="#10291f" opacity=".8"/>
+<path d="M0 445h1800v150H0z" fill="url(#road)"/><path d="M820 0h165v1000H820z" fill="url(#road)"/>
+<g stroke="#d6c78e" stroke-width="7" stroke-dasharray="42 42" opacity=".85"><path d="M0 520h1800"/><path d="M902 0v1000"/></g>
+<g fill="#e9e7da"><path d="M824 461h157v12H824zM824 484h157v12H824zM824 507h157v12H824zM824 530h157v12H824zM824 553h157v12H824z"/></g>
+
+<path d="M0 690c130-35 225-6 310 42s172 73 284 33v235H0z" fill="url(#water)" opacity=".9"/>
+<path d="M1480 760c90-22 186-8 320 45v195h-320z" fill="url(#water)" opacity=".9"/>
+<g fill="none" stroke="#77d8f1" stroke-width="4" opacity=".45"><path d="M20 760c100-28 180-7 290 38"/><path d="M1505 830c90-18 170-4 270 38"/></g>
+
+<g filter="url(#shadow)">
+  <rect x="225" y="190" width="390" height="245" rx="24" fill="#171f23"/>
+  <rect x="250" y="215" width="340" height="195" rx="17" fill="#26323a"/>
+  <rect x="282" y="246" width="276" height="83" rx="13" fill="#0f1e2a" stroke="#55d9ff" stroke-width="3"/>
+  <text x="420" y="282" fill="#ffffff" text-anchor="middle" font-size="35" font-family="Arial" font-weight="800">MANA NEWS</text>
+  <text x="420" y="307" fill="#55d9ff" text-anchor="middle" font-size="13" font-family="Arial" font-weight="700">GAMES • FILMES • SÉRIES</text>
+  <g fill="url(#glass)"><rect x="278" y="348" width="73" height="47" rx="5"/><rect x="367" y="348" width="73" height="47" rx="5"/><rect x="456" y="348" width="73" height="47" rx="5"/></g>
+  <rect x="382" y="344" width="75" height="66" rx="8" fill="#142328" stroke="#55d9ff" stroke-width="2"/>
+</g>
+
+<g filter="url(#shadow)">
+  <rect x="1000" y="145" width="360" height="270" rx="27" fill="#241d24"/>
+  <rect x="1022" y="167" width="316" height="226" rx="20" fill="#342832"/>
+  <rect x="1052" y="195" width="256" height="82" rx="14" fill="#211820" stroke="#ff82c7" stroke-width="3"/>
+  <text x="1180" y="234" fill="#ffffff" text-anchor="middle" font-size="38" font-family="Arial" font-weight="800">YUZО</text>
+  <text x="1180" y="258" fill="#ff82c7" text-anchor="middle" font-size="14" font-family="Arial" font-weight="700">STYLE • AI FASHION</text>
+  <g fill="#ffb0da"><rect x="1048" y="301" width="78" height="73" rx="10"/><rect x="1234" y="301" width="78" height="73" rx="10"/></g>
+  <rect x="1148" y="296" width="64" height="97" rx="10" fill="#1a171b" stroke="#ff82c7" stroke-width="2"/>
+</g>
+
+<g filter="url(#shadow)">
+  <rect x="1325" y="565" width="340" height="265" rx="22" fill="#332b24"/>
+  <rect x="1348" y="590" width="294" height="215" rx="15" fill="#5c4b38"/>
+  <path d="M1325 565h340l-38-65h-264z" fill="#2e5e35"/>
+  <g fill="#4f8a45"><rect x="1355" y="514" width="60" height="50"/><rect x="1415" y="500" width="60" height="64"/><rect x="1475" y="514" width="60" height="50"/><rect x="1535" y="502" width="60" height="62"/></g>
+  <text x="1495" y="645" fill="#f4f6f2" text-anchor="middle" font-size="31" font-family="Arial" font-weight="900">MINECRAFT</text>
+  <text x="1495" y="675" fill="#74e39a" text-anchor="middle" font-size="20" font-family="Arial" font-weight="800">SERVER</text>
+  <rect x="1435" y="700" width="120" height="105" rx="8" fill="#1f261f" stroke="#74e39a" stroke-width="3"/>
+</g>
+
+<g filter="url(#shadow)">
+  <ellipse cx="900" cy="680" rx="240" ry="125" fill="#cdb57a" stroke="#ead6a2" stroke-width="10"/>
+  <ellipse cx="900" cy="680" rx="155" ry="78" fill="#d9c38d" opacity=".6"/>
+  <rect x="815" y="612" width="170" height="88" rx="20" fill="#0c1913" stroke="#77e6a5" stroke-width="2"/>
+  <text x="900" y="650" fill="#fff" text-anchor="middle" font-size="25" font-family="Arial" font-weight="800">LUIZ HENRIQUE</text>
+  <text x="900" y="678" fill="#8cf0b6" text-anchor="middle" font-size="17" font-family="Arial" font-weight="800">SOFTWARE ENGINEER</text>
+</g>
+
+<g fill="#183327" stroke="#294e3d" stroke-width="3">
+  <circle cx="115" cy="195" r="50"/><circle cx="135" cy="175" r="42"/><circle cx="90" cy="175" r="36"/>
+  <circle cx="680" cy="145" r="48"/><circle cx="710" cy="160" r="37"/><circle cx="655" cy="165" r="35"/>
+  <circle cx="1530" cy="160" r="52"/><circle cx="1580" cy="180" r="38"/><circle cx="1490" cy="190" r="35"/>
+  <circle cx="285" cy="725" r="52"/><circle cx="345" cy="760" r="40"/><circle cx="1220" cy="740" r="45"/><circle cx="1700" cy="710" r="52"/>
+</g>
+<g fill="#f4c866" filter="url(#glow)"><circle cx="740" cy="390" r="6"/><circle cx="1065" cy="430" r="6"/><circle cx="680" cy="720" r="6"/><circle cx="1180" cy="730" r="6"/><circle cx="1510" cy="455" r="6"/></g>
+<g stroke="#151d1a" stroke-width="7"><path d="M740 395v58M1065 435v58M680 725v58M1180 735v58M1510 460v58"/></g>
+<g fill="#68462f"><rect x="690" y="760" width="75" height="16" rx="7"/><rect x="1035" y="760" width="75" height="16" rx="7"/></g>
+<g fill="#2f5d3b"><circle cx="565" cy="765" r="34"/><circle cx="1260" cy="805" r="36"/><circle cx="370" cy="650" r="30"/><circle cx="1610" cy="680" r="34"/></g>
+
+<g font-family="Arial" font-weight="800">
+  <rect x="285" y="418" width="270" height="64" rx="18" fill="#07140f" stroke="#55d9ff" stroke-width="3"/><text x="420" y="447" fill="#fff" text-anchor="middle" font-size="19">Mana News</text><text x="420" y="469" fill="#55d9ff" text-anchor="middle" font-size="11">ENTERTAINMENT PLATFORM</text>
+  <rect x="1045" y="398" width="270" height="64" rx="18" fill="#07140f" stroke="#ff82c7" stroke-width="3"/><text x="1180" y="427" fill="#fff" text-anchor="middle" font-size="19">Yuzo Style</text><text x="1180" y="449" fill="#ff82c7" text-anchor="middle" font-size="11">AI FASHION PLATFORM</text>
+  <rect x="1360" y="815" width="270" height="64" rx="18" fill="#07140f" stroke="#74e39a" stroke-width="3"/><text x="1495" y="844" fill="#fff" text-anchor="middle" font-size="19">Minecraft Server</text><text x="1495" y="866" fill="#74e39a" text-anchor="middle" font-size="11">JAVA • DOCKER • INFRA</text>
+</g>
+</svg>
