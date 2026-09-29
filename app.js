@@ -18,6 +18,7 @@ const projects={
 };
 
 let scale=1, px=935, py=530;
+let vx=0, vy=0;
 const down=new Set();
 
 function fit(){
@@ -68,14 +69,40 @@ function tick(now){
   if(down.has('d')||down.has('arrowright'))dx++;
   if(down.has('w')||down.has('arrowup'))dy--;
   if(down.has('s')||down.has('arrowdown'))dy++;
-  const moving=dx||dy;
-  if(moving&&!modal.open){
-    const len=Math.hypot(dx,dy);const speed=4.2*dt;
-    px=Math.max(50,Math.min(BASE_W-50,px+dx/len*speed));
-    py=Math.max(80,Math.min(BASE_H-45,py+dy/len*speed));
-    setPlayer();
+  const hasInput=dx||dy;
+  const accel=.5*dt;
+  const friction=Math.pow(.82,dt);
+  const maxSpeed=4.4;
+
+  if(hasInput&&!modal.open){
+    const len=Math.hypot(dx,dy);
+    vx+=dx/len*accel;
+    vy+=dy/len*accel;
   }
-  player.classList.toggle('walking',!!moving&&!modal.open);
+
+  vx*=friction;
+  vy*=friction;
+
+  const currentSpeed=Math.hypot(vx,vy);
+  if(currentSpeed>maxSpeed){
+    vx=vx/currentSpeed*maxSpeed;
+    vy=vy/currentSpeed*maxSpeed;
+  }
+
+  if(modal.open){
+    vx*=.5;
+    vy*=.5;
+  }
+
+  px=Math.max(50,Math.min(BASE_W-50,px+vx*dt));
+  py=Math.max(80,Math.min(BASE_H-45,py+vy*dt));
+  setPlayer();
+
+  const moving=Math.hypot(vx,vy)>.12&&!modal.open;
+  player.classList.toggle('walking',moving);
+  player.classList.toggle('idle',!moving);
+  player.classList.toggle('facing-left',vx<-.18);
+  player.classList.toggle('facing-right',vx>.18);
   const n=nearest();hint.hidden=!n;if(n)hintText.textContent=`Abrir ${n.name}`;
   requestAnimationFrame(tick);
 }
