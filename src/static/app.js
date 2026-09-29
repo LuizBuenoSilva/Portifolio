@@ -5,7 +5,7 @@ const projects = [
     description: 'Portal de entretenimento e cultura geek com conteúdo sobre games, séries, filmes e livros.',
     tech: ['Web', 'CMS', 'SEO', 'Frontend', 'Backend'],
     url: 'https://mananews.com.br/',
-    x: 430, y: 330
+    x: 520, y: 310
   },
   {
     name: 'Yuzo Style',
@@ -13,7 +13,7 @@ const projects = [
     description: 'Produto de moda com inteligência artificial para criar looks, conceitos visuais e experiências de styling.',
     tech: ['AI', 'Fashion Tech', '3D', 'Web', 'Product'],
     url: 'https://yuzostyle.com/',
-    x: 1030, y: 300
+    x: 1180, y: 285
   },
   {
     name: 'Minecraft Server',
@@ -21,7 +21,7 @@ const projects = [
     description: 'Servidor Minecraft versionado como projeto técnico com Java, Docker e administração de infraestrutura.',
     tech: ['Java', 'Docker', 'Server', 'Infrastructure'],
     url: 'https://github.com/LuizBuenoSilva/minecraft',
-    x: 1450, y: 485
+    x: 1560, y: 520
   }
 ];
 
@@ -53,30 +53,58 @@ class PortfolioScene extends Phaser.Scene {
   constructor() { super('PortfolioScene'); }
 
   preload() {
-    this.load.svg('city', './assets/dev-city.svg', { width: 1800, height: 1000 });
+    this.load.svg('city', './assets/dev-city.svg', { width: 1920, height: 864 });
   }
 
   create() {
-    this.add.image(900, 500, 'city').setDepth(0);
-    this.cameras.main.setBounds(0, 0, 1800, 1000);
-    this.physics.world.setBounds(0, 0, 1800, 1000);
+    this.add.image(960, 432, 'city').setDepth(0);
 
-    this.player = this.add.container(900, 560).setDepth(20);
-    const shadow = this.add.ellipse(0, 28, 34, 11, 0x000000, .28);
-    const body = this.add.roundedRectangle(0, 2, 26, 35, 7, 0x4ed08a).setStrokeStyle(3, 0x10251b);
-    const head = this.add.circle(0, -21, 11, 0xd6a078).setStrokeStyle(3, 0x10251b);
-    const hair = this.add.rectangle(0, -28, 20, 7, 0x10251b);
-    const legA = this.add.rectangle(-6, 24, 7, 18, 0x142b21);
-    const legB = this.add.rectangle(6, 24, 7, 18, 0x142b21);
-    this.player.add([shadow, legA, legB, body, head, hair]);
-    this.legA = legA; this.legB = legB;
+    this.cameras.main.setBounds(0, 0, 1920, 864);
+    this.physics.world.setBounds(0, 0, 1920, 864);
+
+    this.player = this.add.container(960, 505).setDepth(40);
+
+    const shadow = this.add.ellipse(0, 31, 40, 13, 0x000000, .28);
+
+    const legs = this.add.graphics();
+    legs.fillStyle(0x15291f, 1);
+    legs.fillRoundedRect(-14, 10, 11, 28, 5);
+    legs.fillRoundedRect(3, 10, 11, 28, 5);
+
+    const body = this.add.graphics();
+    body.fillStyle(0x55d995, 1);
+    body.lineStyle(3, 0x10231a, 1);
+    body.fillRoundedRect(-18, -13, 36, 38, 10);
+    body.strokeRoundedRect(-18, -13, 36, 38, 10);
+
+    const head = this.add.graphics();
+    head.fillStyle(0xd6a078, 1);
+    head.lineStyle(3, 0x10231a, 1);
+    head.fillCircle(0, -31, 13);
+    head.strokeCircle(0, -31, 13);
+
+    const hair = this.add.graphics();
+    hair.fillStyle(0x10231a, 1);
+    hair.fillRoundedRect(-13, -43, 26, 10, 5);
+
+    const armL = this.add.graphics();
+    armL.fillStyle(0x10231a, 1);
+    armL.fillRoundedRect(-24, -7, 7, 26, 4);
+
+    const armR = this.add.graphics();
+    armR.fillStyle(0x10231a, 1);
+    armR.fillRoundedRect(17, -7, 7, 26, 4);
+
+    this.player.add([shadow, legs, armL, armR, body, head, hair]);
+    this.playerBody = body;
+    this.playerLegs = legs;
 
     this.cursors = this.input.keyboard.createCursorKeys();
     this.keys = this.input.keyboard.addKeys('W,A,S,D,E');
     this.nearby = null;
 
     projects.forEach(project => {
-      const zone = this.add.zone(project.x, project.y, 250, 210).setInteractive({ useHandCursor: true });
+      const zone = this.add.zone(project.x, project.y, 300, 240).setInteractive({ useHandCursor: true });
       zone.on('pointerdown', () => openProject(project));
     });
 
@@ -84,20 +112,33 @@ class PortfolioScene extends Phaser.Scene {
       if (this.nearby && !modal.open) openProject(this.nearby);
     });
 
-    this.scale.on('resize', () => this.updateZoom());
-    this.updateZoom();
+    this.scale.on('resize', () => this.updateCamera());
+    this.updateCamera();
   }
 
-  updateZoom() {
-    const zoom = Math.max(.72, Math.min(1.08, window.innerWidth / 1700, window.innerHeight / 920));
-    this.cameras.main.setZoom(zoom);
-    this.cameras.main.startFollow(this.player, true, .09, .09);
+  updateCamera() {
+    const viewW = this.scale.width;
+    const viewH = this.scale.height;
+    const fitZoom = Math.min(viewW / 1920, viewH / 864);
+
+    if (viewW >= 900) {
+      this.cameras.main.stopFollow();
+      this.cameras.main.setZoom(fitZoom);
+      this.cameras.main.centerOn(960, 432);
+    } else {
+      const mobileZoom = Math.max(.72, fitZoom * 1.7);
+      this.cameras.main.setZoom(mobileZoom);
+      this.cameras.main.startFollow(this.player, true, .1, .1);
+    }
   }
 
   update(time) {
     if (modal.open) return;
-    const speed = 3.6;
-    let dx = 0, dy = 0;
+
+    const speed = 4;
+    let dx = 0;
+    let dy = 0;
+
     if (this.cursors.left.isDown || this.keys.A.isDown) dx -= 1;
     if (this.cursors.right.isDown || this.keys.D.isDown) dx += 1;
     if (this.cursors.up.isDown || this.keys.W.isDown) dy -= 1;
@@ -105,19 +146,29 @@ class PortfolioScene extends Phaser.Scene {
 
     if (dx || dy) {
       const len = Math.hypot(dx, dy);
-      this.player.x = Phaser.Math.Clamp(this.player.x + dx / len * speed, 35, 1765);
-      this.player.y = Phaser.Math.Clamp(this.player.y + dy / len * speed, 70, 965);
-      const bob = Math.sin(time * .018) * 3;
-      this.legA.y = 24 + bob;
-      this.legB.y = 24 - bob;
+      this.player.x = Phaser.Math.Clamp(this.player.x + dx / len * speed, 50, 1870);
+      this.player.y = Phaser.Math.Clamp(this.player.y + dy / len * speed, 80, 815);
+
+      const bob = Math.sin(time * .02) * 2.5;
+      this.player.y += bob * .03;
+      this.playerLegs.rotation = Math.sin(time * .018) * .055;
+    } else {
+      this.playerLegs.rotation = 0;
     }
 
-    let nearest = null, distance = 145;
+    let nearest = null;
+    let distance = 155;
+
     for (const project of projects) {
       const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, project.x, project.y);
-      if (d < distance) { distance = d; nearest = project; }
+      if (d < distance) {
+        distance = d;
+        nearest = project;
+      }
     }
+
     this.nearby = nearest;
+
     if (nearest) {
       hint.hidden = false;
       hintText.textContent = 'Abrir ' + nearest.name;
@@ -134,6 +185,13 @@ new Phaser.Game({
   width: window.innerWidth,
   height: window.innerHeight,
   scene: PortfolioScene,
-  scale: { mode: Phaser.Scale.RESIZE, autoCenter: Phaser.Scale.CENTER_BOTH },
-  render: { antialias: true, pixelArt: false }
+  scale: {
+    mode: Phaser.Scale.RESIZE,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  },
+  render: {
+    antialias: true,
+    pixelArt: false,
+    roundPixels: false
+  }
 });
